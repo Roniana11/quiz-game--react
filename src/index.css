@@ -343,8 +343,8 @@ height: auto;
 }
 
 .answers-button:hover{
-  background: none;
-  color: none;
+  background:white;
+  color: black;
 }
 
 .answers-button:active{
