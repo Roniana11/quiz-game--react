@@ -278,10 +278,14 @@ height: auto;
 
 @media only screen and (max-width: 600px){
 
+  #root{
+    height: 100%;
+  }
   body{
     background-color: #f1f1f1;
     background-image: none;
     height: 100%;
+    position: absolute;
   }
   
   .home-container {
@@ -310,27 +314,49 @@ height: auto;
 }
 
 .game-container{
-  position:absolute;
-  top:0;
-  left:0;
+  position:relative;
   width:100%;
   height: 100%;
+  right: 0;
 }
 .game-container .card{
-  height: 100%;
+  height: 70%;
+  width: 100%;
   margin:0;
-  padding:30px;
-
+  padding:30px;  
+  justify-content: center;
+  position: relative;
+  min-height: 550px;
 }
 
 .answers-container{
-  position:absolute;
-  bottom:30%;
+  position:relative;
+  top:0%;
 }
 
 .question{
-  position: absolute;
-  bottom: 60%;
+  position: relative;
+  top: 0%;
+}
+
+.form-container input{
+  height: 40px;
+  width: 90%;
+  padding: 10px;
+  margin-bottom:15px;
+}
+
+.level-back{
+  transform:rotateY(180deg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-container{
+  position:absolute;
+  bottom: 5%;
 }
   
 
