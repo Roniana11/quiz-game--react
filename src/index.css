@@ -1,14 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap');
+*{
+  box-sizing: border-box;
+}
+
+
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-image: url('./images/36095788.jpg');
+  background-repeat: repeat;
+  background-size:cover;
+  /* font-family: 'Barlow Condensed', sans-serif; */
+  font-family: 'Lobster', cursive;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root{
+  width:100%;
+}
+
+button{
+  cursor: pointer;
+}
+
+.modal{
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 0.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  position:fixed;
+  top: 100px;
+  left: 25%;
+  width:50%;
+  height:350px;
+}
+
+.modal button{
+  background-color: rgb(214, 153, 19);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  margin: 10px;
+  font-family: 'roboto';
+  font-size: 18px;
+  border-style: none;
+  color: white;
+  max-width: 200px;
+}
+
+
+.backdrop{
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.808);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.card {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.home-container {
+  width:70%;
+  position:fixed;
+  top:80px;
+  left:15%;
+  min-width: 600px;
+} 
+
+.home-container .card{
+  padding-bottom: 30px;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+  
+}
+
+.form-container input{
+  height: 40px;
+  width: 200px;
+  padding: 10px;
+  margin-bottom:15px;
+}
+
+.game-container{
+  width: 80%;
+  position: fixed;
+  top:50px;
+  right:10%;
+}
+
+.game-container .card{
+  min-height: 450px;
+  padding:15px;
+}
+
+.level-container{
+  display: flex;
+}
+
+.level-box{
+  background-color: transparent;
+  width: 150px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  margin:10px;
+}
+
+.level{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;;
+}
+
+.level-box .level:hover{
+  transform: rotateY(180deg);
+  box-shadow: -5px 5px 5px #aaa;
+}
+
+.level-front, .level-back{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.level-front{
+
+  box-shadow: -5px 5px 5px #aaa;
+}
+
+.locked{
+  background-image: url('./images/depositphotos_322826128-stock-illustration-vector-illustation-of-vinyl-record.jpg');
+  background-size: 25px;
+  background-repeat:repeat;
+}
+.completed{
+  background-image: url('./images/trophy (1).png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.level-back{
+  transform:rotateY(180deg);
+  padding: 20px;
+}
+
+.level-back button{
+  cursor: pointer;
+  color:rgb(214, 153, 19);
+  background: transparent;
+  border-style: none;
+  width: 120px;
+  height: 120px;
+  font-family: 'roboto';
+  font-size: 20px;
+  padding-bottom:50px;
+}
+
+.answers-container{
+  display: grid;
+  width: 80%;
+  grid-template-columns: 1fr 1fr;
+}
+
+.answers-button{
+  font-family: 'roboto';
+  font-size: 18px;
+  background-color: white;
+  border-style: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  margin: 10px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.answers-button:hover{
+  background: burlywood;
+  color: white;
+  font-weight: bold;
+}
+
+.answers-button:active{
+  background: rgb(221, 151, 60);
+  color: white;
+  font-weight: bold;
+}
+
+.score{
+  font-size: 18px;
+  position: absolute;
+  top:25px;
+  left:25px;
+}
+
+.player-name{
+  font-size: 18px;
+  position: absolute;
+  top:0;
+  left:25px;
+}
+
+.question{
+  font-family: 'roboto';
+}
+
+.clock{
+  background-color:burlywood;
+  border-radius: 30px;
+  color: white;
+  padding: 15px;
+  width: 50px;
+  height:50px;
+  position:absolute;
+  top:20px;
+  right:20px;
+}
+
+.button-container{
+  position:absolute;
+  bottom: 15px;
+}
+
+.button-container button{
+  background-color: rgb(214, 153, 19);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  margin: 10px;
+  font-family: 'roboto';
+  font-size: 15px;
+  border-style: none;
+  color: white;
+  max-width: 200px;
+  width:100px;
+}
+
+.summery img{
+width:80px;
+height: auto;
+}
+
+.summery h1,h2{
+  margin:10px;
+}
+
+@media only screen and (max-width: 600px){
+
+  body{
+    background-color: #f1f1f1;
+    background-image: none;
+    height: 100%;
+  }
+  
+  .home-container {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height: 100%;
+} 
+
+.home-container .card{
+  height: 100%;
+  margin:0;
+  padding:30px;
+}
+
+.level-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.level-box{
+  background-color: transparent;
+  width: 200px;
+  height: 200px;
+}
+
+.game-container{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height: 100%;
+}
+.game-container .card{
+  height: 100%;
+  margin:0;
+  padding:30px;
+
+}
+
+.answers-container{
+  position:absolute;
+  bottom:30%;
+}
+
+.question{
+  position: absolute;
+  bottom: 60%;
+}
+  
+
 }

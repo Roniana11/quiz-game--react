@@ -1,43 +1,23 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import "./App.css";
+import GamePage from "./pages/Game";
+import HomePage from "./pages/Home";
+import {fetchQuestions} from './store/game-actions';
+import PreGamePage from "./pages/PreGame";
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
-  }
+function App(){
 
-  handleClick = api => e => {
-    e.preventDefault()
-
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
-
-  render() {
-    const { loading, msg } = this.state
-
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
+  const dispatch = useDispatch();
+  dispatch(fetchQuestions());
+  return (
+      <Routes>
+        <Route path='/' element={<PreGamePage/>}></Route>
+        <Route path='/home' element={<HomePage/>}></Route>
+        <Route path='/quiz' element={<GamePage/>}></Route>
+      </Routes>
     )
-  }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-      </div>
-    )
-  }
-}
-
-export default App
+export default App;
