@@ -5,7 +5,7 @@ return correct === chosenAnswer;
 
 export function cleanString(str){
 
-  let newString = str.replace('&#39',"'");
+  let newString = str.replace('&#39;',"'");
   newString = newString.replace('&quot;','"');
 
   return newString;
