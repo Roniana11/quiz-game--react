@@ -345,6 +345,7 @@ height: auto;
 .answers-button:hover{
   background:white;
   color: black;
+  font-weight: 400;
 }
 
 .answers-button:active{

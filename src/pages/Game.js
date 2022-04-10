@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import useSound from 'use-sound';
@@ -12,7 +14,6 @@ import Card from '../components/ui/Card';
 import Summery from '../components/game/Summery';
 import Quit from '../components/game/Quit';
 
-
 function GamePage() {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.questionsByLevel);
@@ -21,32 +22,35 @@ function GamePage() {
   const score = useSelector((state) => state.score);
   const [isQuizOver, setIsQuizOver] = useState(false);
   const [quit, setQuit] = useState(false);
-  const [play] = useSound(clapping,{volume:0.25});
+  const [play] = useSound(clapping, { volume: 0.25 });
+  const notify = () => toast.success('Correct!');
 
-  
- const changeQuestionHandler = useCallback(()=>{
+  const changeQuestionHandler = useCallback(() => {
     if (currentQuestion + 1 === questions.length) {
       setIsQuizOver(true);
-      if(score >= 50){
+      if (score >= 50) {
         dispatch(gameActions.openNextLevel());
       }
       play();
       return;
     }
     dispatch(gameActions.setCurrentQuestion({ index: currentQuestion + 1 }));
-  },[dispatch,play,currentQuestion,questions,score])
+  }, [dispatch, play, currentQuestion, questions, score]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       console.log(timer);
       changeQuestionHandler();
     }, 61000);
-    return ()=>{clearTimeout(timer)}
-  }, [currentQuestion,changeQuestionHandler]);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [currentQuestion, changeQuestionHandler]);
 
   function chosenAnswerHandler(isCorrect) {
     if (isCorrect) {
       dispatch(gameActions.updateScore());
+      notify();
     }
     changeQuestionHandler();
   }
@@ -79,10 +83,18 @@ function GamePage() {
           <button onClick={nextQuestionHandler}>Next</button>
         </div>
       </Card>
-      {isQuizOver && (
-        <Summery score={score}></Summery>
-      )}
+      {isQuizOver && <Summery score={score}></Summery>}
       {quit && <Quit></Quit>}
+      <ToastContainer
+        position="top-center"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+      />
     </div>
   );
 }
