@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import useSound from 'use-sound';
@@ -23,17 +23,18 @@ function GamePage() {
   const [quit, setQuit] = useState(false);
   const [play] = useSound(clapping,{volume:0.25});
 
-  function changeQuestionHandler() {
+  
+ const changeQuestionHandler = useCallback(()=>{
     if (currentQuestion + 1 === questions.length) {
       setIsQuizOver(true);
-      if(score > 5){
+      if(score > 50){
         dispatch(gameActions.openNextLevel());
       }
       play();
       return;
     }
     dispatch(gameActions.setCurrentQuestion({ index: currentQuestion + 1 }));
-  }
+  },[dispatch,play,currentQuestion,questions,score])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -41,7 +42,7 @@ function GamePage() {
       changeQuestionHandler();
     }, 61000);
     return ()=>{clearTimeout(timer)}
-  }, [currentQuestion]);
+  }, [currentQuestion,changeQuestionHandler]);
 
   function chosenAnswerHandler(isCorrect) {
     if (isCorrect) {
