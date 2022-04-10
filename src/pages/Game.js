@@ -27,7 +27,7 @@ function GamePage() {
  const changeQuestionHandler = useCallback(()=>{
     if (currentQuestion + 1 === questions.length) {
       setIsQuizOver(true);
-      if(score > 50){
+      if(score >= 50){
         dispatch(gameActions.openNextLevel());
       }
       play();
