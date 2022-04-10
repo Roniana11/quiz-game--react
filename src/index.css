@@ -342,6 +342,17 @@ height: auto;
   top: 0%;
 }
 
+.answers-button:hover{
+  background: none;
+  color: none;
+}
+
+.answers-button:active{
+  background: rgb(221, 151, 60);
+  color: white;
+  font-weight: bold;
+}
+
 .form-container input{
   height: 40px;
   width: 90%;
@@ -361,6 +372,5 @@ height: auto;
   position:absolute;
   bottom: 5%;
 }
-  
 
 }
